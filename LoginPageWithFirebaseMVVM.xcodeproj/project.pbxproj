@@ -15,6 +15,7 @@
 		3472EDC029435F9F00269E6E /* Verification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3472EDBF29435F9F00269E6E /* Verification.swift */; };
 		3472EDC4294360C400269E6E /* OTPViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3472EDC3294360C400269E6E /* OTPViewModel.swift */; };
 		3472EDCA29437EF700269E6E /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3472EDC929437EF700269E6E /* FirebaseAuth */; };
+		3472EDCE294651F800269E6E /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3472EDCD294651F800269E6E /* Login.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		3472EDBD29435F6800269E6E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3472EDBF29435F9F00269E6E /* Verification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Verification.swift; sourceTree = "<group>"; };
 		3472EDC3294360C400269E6E /* OTPViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OTPViewModel.swift; sourceTree = "<group>"; };
+		3472EDCD294651F800269E6E /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 			isa = PBXGroup;
 			children = (
 				3472EDBF29435F9F00269E6E /* Verification.swift */,
+				3472EDCD294651F800269E6E /* Login.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -172,6 +175,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3472EDC4294360C400269E6E /* OTPViewModel.swift in Sources */,
+				3472EDCE294651F800269E6E /* Login.swift in Sources */,
 				3472EDC029435F9F00269E6E /* Verification.swift in Sources */,
 				3472EDB129435BF300269E6E /* ContentView.swift in Sources */,
 				3472EDAF29435BF300269E6E /* LoginPageWithFirebaseMVVMApp.swift in Sources */,

@@ -24,6 +24,8 @@ class OTPViewModel: ObservableObject {
     // MARK: OTP Credentials
     @Published var verificationCode: String = ""
     @Published var isLoading: Bool = false
+    @Published var navigationTag: String?
+    @AppStorage("log_status") var log_status = false
     
     // MARK: Sending OTP
     
@@ -45,6 +47,20 @@ class OTPViewModel: ObservableObject {
             self.isLoading = false
             self.errorMsg = error
             self.showAlert.toggle()
+            self.navigationTag = "VERIFICATION"
+        }
+    }
+    func verifyOTP() async{
+        do{
+            isLoading = true 
+            let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationCode, verificationCode: otpText)
+            let  _ = try await Auth.auth().signIn(with: credential)
+            DispatchQueue.main.async { [self] in
+                isLoading = false
+                log_status = true
+            }
+        }catch{
+            handleError(error: error.localizedDescription)
         }
     }
 }

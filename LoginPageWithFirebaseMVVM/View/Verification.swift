@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct Verification: View {
-    @StateObject var otpModel: OTPViewModel =  .init()
+    @EnvironmentObject var otpModel: OTPViewModel
     
     //MARK: TextField FocusState
     @FocusState var activeField : OTPField?
@@ -18,7 +18,7 @@ struct Verification: View {
             OTPField()
             
             Button {
-                
+                Task{await otpModel.verifyOTP()}
             } label: {
                 Text("Verify")
                     .fontWeight(.semibold)
@@ -28,6 +28,11 @@ struct Verification: View {
                     .background{
                         RoundedRectangle(cornerRadius: 10,style: .continuous)
                             .fill(.blue)
+                            .opacity(otpModel.isLoading ? 0 : 1 )
+                    }
+                    .overlay {
+                        ProgressView()
+                            .opacity(otpModel.isLoading ? 1 : 0 )
                     }
             }
             .disabled(checkStates())
@@ -51,6 +56,7 @@ struct Verification: View {
         .onChange(of: otpModel.otpFields) { newValue in
             OTPCondition(value: newValue)
         }
+        .alert(otpModel.errorMsg,isPresented: $otpModel.showAlert) {}
     }
     
     
@@ -63,6 +69,22 @@ struct Verification: View {
     
     // MARK: Conditions for Custom OTP Field & Limiting Only one Text
     func OTPCondition(value: [String]){
+        
+        // Checking if OTP is Pressed
+        for index in 0..<6 {
+            if value[index].count == 6 {
+                DispatchQueue.main.async {
+                    otpModel.otpText = value[index]
+                    otpModel.otpFields[index] = ""
+                    
+                    // Updating All TextFields with Value
+                    for item in otpModel.otpText.enumerated(){
+                        otpModel.otpFields[item.offset] = String(item.element)
+                    }
+                }
+                return
+            }
+        }
         
         // Moving Next Field If Current Field Type
         for index in 0..<5 {
